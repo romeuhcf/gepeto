@@ -48,6 +48,7 @@ def all_lines_from_dir(dir)
   files =all.select{|e| File.file?(e) }
   files.each do |file|
     File.foreach(file).with_index do |line, lineno|
+      line.encode!('UTF-8', :undef => :replace, :invalid => :replace, :replace => "")
       yield file, line, lineno
     end
   end
