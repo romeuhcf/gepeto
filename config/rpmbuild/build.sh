@@ -6,7 +6,6 @@ cd /root/rpmbuild/SOURCES/code
 make sources
 cp *.spec /root/rpmbuild/SPECS
 cp -v *.bz2 /root/rpmbuild/SOURCES
-
 # generate rpm
 cd /root/rpmbuild/SPECS
 yum-builddep -y *.spec

@@ -1,4 +1,4 @@
-FROM centos:centos6 
+FROM centos:centos6.6
 RUN yum install -y epel-release
 # ABRIL RUBY
 ADD config/dockerfiles/extra_repo.repo /etc/yum.repos.d/
