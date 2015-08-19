@@ -1,0 +1,11 @@
+[ruby22]
+name=Ruby 2.2 repository
+baseurl=http://172.16.254.245/ruby22-prod/latest/x86_64/
+enabled=1
+gpgcheck=0
+
+[tracelytics]
+name = "Tracelytics Repo"
+baseurl = "http://mirror.abrilcloud.com.br/tracelytics/el/6/x86_64/"
+enabled = 1
+gpgcheck = 0

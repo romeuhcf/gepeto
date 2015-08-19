@@ -10,14 +10,18 @@ require 'gepeto/lint_plugin'
 require 'gepeto/line_scanner_plugin'
 include Gepeto::LintEventManager
 
-class Cli < Thor
-  desc "lint PUPPET_MODULE_DIR REPO_DIR", "Valida conteudo do modulo puppet e do repo do projeto"
-  def lint(puppet , repo)
-    env = Gepeto::Env.new(plugins, self, puppet, repo)
-    plugins.each do |plugin|
-      plugin.call(env, puppet, repo)
+module LintCommand
+  def self.included(base)
+    base.class_eval do
+      desc "lint PUPPET_MODULE_DIR REPO_DIR", "Valida conteudo do modulo puppet e do repo do projeto"
+      def lint(puppet , repo)
+        env = Gepeto::Env.new(plugins, self, puppet, repo)
+        plugins.each do |plugin|
+          plugin.call(env, puppet, repo)
+        end
+        print_result(env)
+      end
     end
-    print_result(env)
   end
 
   protected
@@ -63,6 +67,53 @@ class Cli < Thor
                    load_plugins
                    Gepeto::LintPlugin.all
                  end
+  end
+end
+
+module RpmBuildCommand
+  def self.included(base)
+    base.class_eval do
+      desc "rpmbuild REPO_DIR", "Usa docker para criar rpm como o koji faria"
+      def rpmbuild(*args)
+        do_rpmbuild(*args)
+      end
+    end
+  end
+
+  protected
+  def do_rpmbuild(repo_root_path)
+    repo_root_path = File.expand_path(repo_root_path)
+    app_name       = File.basename(repo_root_path)
+    cache_root     = "/tmp/cache"
+    dockerfile     = File.join(gepeto_root, "config/dockerfiles/rpmbuild.dockerfile")
+    run_cmds [
+      "cd '#{repo_root_path}' && docker build -f #{dockerfile} -t #{app_name}.rpmbuild .",
+      "mkdir -p #{cache_root}",
+      [
+        "docker run --rm=true -t",
+        "-v #{repo_root_path}:/root/rpmbuild/SOURCES/code",
+        "-v #{cache_root}:/cached_dirs",
+        "#{app_name}.rpmbuild"
+      ].join(' ')
+    ]
+  end
+
+  def run_cmds(cmds)
+    cmds.each do |cmd|
+      puts "\e[34m", "=" * 100, cmd , "=" * 100, "\e[0m"
+      system cmd
+      raise unless $?.success?
+    end
+  end
+end
+
+class Cli < Thor
+  include LintCommand
+  include RpmBuildCommand
+
+  protected
+  def gepeto_root
+    File.expand_path( File.join( File.dirname(__FILE__), '..'))
   end
 end
 Cli.start(ARGV)
