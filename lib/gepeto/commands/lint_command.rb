@@ -49,7 +49,7 @@ module LintCommand
   end
 
   def load_plugins
-    Dir[File.join(File.dirname(__FILE__),"../lib/plugins/lint/*.rb")].each do |plugin_file|
+    Dir[File.join(gepeto_root, "lib/plugins/lint/*.rb")].each do |plugin_file|
       load plugin_file
     end
   end
