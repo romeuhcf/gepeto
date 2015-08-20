@@ -1,30 +1,44 @@
-Abril Gepeto é uma ferramenta de validação de regras de puppet para os projetos da Abril com o intuito de facilitar a padronização de regras e agilizar a busca e correção de erros.
+# Abril Gepeto
+uma ferramenta de validação de regras de puppet para os projetos da Abril com o intuito de facilitar a padronização de regras e agilizar a busca e correção de erros.
 
 
-Como usar
-=========
+## Como usar
 
-    ruby bin/cli.rb 
+    ruby bin/cli.rb <comando> [parametros]
 
-Commandos Principais
-====================
+## Commandos Principais
 
-Lint - Validação de estrutura / conteúdo de módulo puppet e projeto
+### Rpm build
+Geração do RPM da do repositorio indicado
+
+    ruby bin/cli.rb rpmbuild <REPOSITORY_DIR>
+
+Onde:
+
+* PUPPET_DIR: caminho do módulo do puppet a ser validado.
+
+Exemplo:
+
+    ruby  bin/cli.rb rpmbuild ~/Abril/vejinhas-site/ 
+
+
+### Lint 
+
+Validação de estrutura / conteúdo de módulo puppet e projeto
 
     ruby bin/cli.rb lint <PUPPET_MODULE_DIR> <REPOSITORY_DIR>
 
 Onde:
 
-* PUPPET_DIRECTORY: caminho do módulo do puppet a ser validado.
-* REPOSITORY: caminho do projeto onde está o arquivo .spec.
+* PUPPET_MODULE_DIR: caminho do módulo do puppet a ser validado.
+* REPOSITORY_DIR: caminho do projeto onde está o arquivo .spec.
 
 Exemplo:
 
     ruby bin/cli.rb lint ~/projects/puppet/modules/cmsveja ~/projets/cmsveja
 
 
-Estrutura
-=========
+#### Estrutura
 
 As regras de validação são plugins armazenados em arquivos .rb dentro da pasta `lib/plugins/lint`. Existem dois tipos de plugin.
 
@@ -52,8 +66,7 @@ on(:puppet_line) do |env, scope, file, line, lineno|
 end
 ``` 
 
-Emitindo Validações
-===================
+#### Emitindo Validações
 
 Os plugins devem registrar os erros encontrados utilizando a chamada:
 
@@ -61,8 +74,7 @@ Os plugins devem registrar os erros encontrados utilizando a chamada:
 env.errors.add(escopo, file, linecontent, line_no, message)
 ```
 
-TODO
-====
+## TODO
 
 * [ ] Validar estrutura do modulo puppet (manifests/init.pp, manifests/config.pp, ...)
 * [ ] Validar estrutura do projeto (Makefile, .spec)
