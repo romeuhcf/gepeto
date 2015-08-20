@@ -29,12 +29,4 @@ module RpmBuildCommand
       ].join(' ')
     ]
   end
-
-  def run_cmds(cmds)
-    cmds.each do |cmd|
-      puts "\e[34m", "=" * 100, cmd , "=" * 100, "\e[0m"
-      system cmd
-      raise unless $?.success?
-    end
-  end
 end

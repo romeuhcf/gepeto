@@ -15,16 +15,32 @@ Geração do RPM da do repositorio indicado
 
 Onde:
 
-* PUPPET_DIR: caminho do módulo do puppet a ser validado.
+* REPOSITORY_DIR: caminho do repositorio do projeto a ser construido
 
 Exemplo:
 
-    ruby  bin/cli.rb rpmbuild ~/Abril/vejinhas-site/ 
+    ruby  bin/cli.rb rpmbuild ~/meuy-querido-projeot/
 
 Dependências:
 
 * É necessário ter serviço docker rodando na localhost
 
+### Puppet
+Provisionamento de teste de puppet em docker
+    ruby bin/cli.rb puppet <PUPPET_DIR> <PUPPET_MODULE> [app_environment]
+
+Onde:
+
+* PUPPET_DIR: caminho da raiz do puppet repository clonado.
+* PUPPET_MODULE: nome do modulo do puppet a ser provisonado.
+
+Exemplo:
+
+    ruby bin/cli.rb puppet ~/puppet-manifests/ meuprojeto production
+
+Dependências:
+
+* É necessário ter serviço docker rodando na localhost
 
 ### Lint 
 
@@ -87,6 +103,8 @@ env.errors.add(escopo, file, linecontent, line_no, message)
 * [ ] Identificar criação de diretorios no puppet que deveriam estar no spec
 * [ ] Identificar arquivos de log em diretorios invalids (http -> /var/log/httpd, aplicação -> /var/log/<aplicacao>
 * [ ] Plugin para puppet lint
-* [ ] Comando para criacao de rpm via docker
+* [ ] Verificar endereço ip hardcoded no codigo do projeto (ao menos no config)
+* [ ] Verificar nome de dominio hardcoded nas configurações do projeto
+* [v] Comando para criacao de rpm via docker
 * [ ] Comando para instalacao de rpm gerado via docker
-* [ ] Comando para provisionamento de imagem docker via puppet
+* [v] Comando para provisionamento de imagem docker via puppet

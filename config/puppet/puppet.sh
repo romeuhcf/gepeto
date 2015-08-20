@@ -10,5 +10,13 @@ facter
 PUPPET_ROOT="/etc/puppet"
 cp "$PUPPET_ROOT/hiera.yaml.sample" "$PUPPET_ROOT/hiera.yaml"
 MODULES_PATH="$PUPPET_ROOT/modules"
-puppet apply -tvd --modulepath=$MODULES_PATH -e"include $PUPPET_MODULE"
+
+if puppet apply -tvd --modulepath=$MODULES_PATH -e"include $PUPPET_MODULE"; then
+  echo "Sucesso aplicando puppet"
+else
+  echo "Erro aplicando puppet"
+fi
+
+echo "Abrindo shell..."
+bash
 
