@@ -1,6 +1,6 @@
 #!/bin/bash 
 set -e 
-
+mkdir -p /opt/lib/puppet
 if [ -z "$PUPPET_MODULE" ]; then 
   echo "Favor setar a variavel de ambiente PUPPET_MODULE"
   exit 1
