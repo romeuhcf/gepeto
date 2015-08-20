@@ -21,6 +21,10 @@ Exemplo:
 
     ruby  bin/cli.rb rpmbuild ~/Abril/vejinhas-site/ 
 
+Dependências:
+
+* É necessário ter serviço docker rodando na localhost
+
 
 ### Lint 
 
