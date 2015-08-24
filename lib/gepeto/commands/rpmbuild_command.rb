@@ -13,11 +13,13 @@ module RpmBuildCommand
     repo_root_path = File.expand_path(repo_root_path)
     app_name       = File.basename(repo_root_path)
     cache_root     = "/tmp/cache"
+    yum_cache_dir  = File.join("/tmp/cache/rpmbuild", app_name)
     dockerfile     = File.join(gepeto_root, "config/rpmbuild/rpmbuild.dockerfile")
     buildfile      = File.join(gepeto_root, "config/rpmbuild/build.sh")
     extrarepo_file = File.join(gepeto_root, "config/rpmbuild/extra_repo.repo")
     run_cmds [
       "mkdir -p '#{repo_root_path}/tmp'",
+      "mkdir -p '#{yum_cache_dir}'",
       "cp -f '#{dockerfile}' '#{buildfile}' '#{extrarepo_file}' '#{repo_root_path}/tmp'",
       "mkdir -p #{cache_root}",
       "cd '#{repo_root_path}' && docker build -f tmp/rpmbuild.dockerfile -t #{app_name}.rpmbuild .",
@@ -25,6 +27,7 @@ module RpmBuildCommand
         "docker run --rm=true -t",
         "-v #{repo_root_path}:/root/rpmbuild/SOURCES/code",
         "-v #{cache_root}:/cached_dirs",
+        "-v #{yum_cache_dir}:/var/cache/yum/",
         "#{app_name}.rpmbuild"
       ].join(' ')
     ]
