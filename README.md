@@ -19,7 +19,7 @@ Onde:
 
 Exemplo:
 
-    ruby  bin/cli.rb rpmbuild ~/meuy-querido-projeot/
+    ruby  bin/cli.rb rpmbuild ~/meu-querido-projeto/
 
 Dependências:
 
