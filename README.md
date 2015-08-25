@@ -27,7 +27,7 @@ Dependências:
 
 ### Puppet
 Provisionamento de teste de puppet em docker
-    ruby bin/cli.rb puppet <PUPPET_DIR> <PUPPET_MODULE> [app_environment]
+    ruby bin/cli.rb puppet <PUPPET_DIR> <PUPPET_MODULE> [app_environment] [rpm a ser instalado no fim]
 
 Onde:
 
