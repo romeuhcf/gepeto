@@ -8,11 +8,13 @@ $:.unshift File.join(File.dirname(__FILE__), '../lib')
 require 'gepeto/env'
 require 'gepeto/commands/lint_command'
 require 'gepeto/commands/rpmbuild_command'
+require 'gepeto/commands/rpminstall_command'
 require 'gepeto/commands/puppet_command'
 
 class Cli < Thor
   include LintCommand
   include RpmBuildCommand
+  include RpmInstallCommand
   include PuppetCommand
 
   protected
