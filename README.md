@@ -42,7 +42,7 @@ Dependências:
 
 * É necessário ter serviço docker rodando na localhost
 
-### Lint 
+### Lint
 
 Validação de estrutura / conteúdo de módulo puppet e projeto
 
@@ -72,7 +72,7 @@ class WelcomePlugin < Gepeto::LintPlugin
 end
 ```
 
-* Plugin para tratar linhas - Na verdade há um plugin como o acima que varre linha a linha emitindo eventos para que plugins se registrem tratando-as. 
+* Plugin para tratar linhas - Na verdade há um plugin como o acima que varre linha a linha emitindo eventos para que plugins se registrem tratando-as.
 Exemplo de regra:
 
 ```ruby
@@ -84,7 +84,7 @@ on(:puppet_line) do |env, scope, file, line, lineno|
   env.errors.add(:puppet, file, line, lineno, "Não deveria gerenciar usuários - mover para spec") if line =~ /useradd|adduser/
   env.errors.add(:puppet, file, line, lineno, "Não deveria gerenciar grupos - mover para spec") if line =~ /groupadd|addgroup/
 end
-``` 
+```
 
 #### Emitindo Validações
 
@@ -93,6 +93,13 @@ Os plugins devem registrar os erros encontrados utilizando a chamada:
 ```ruby
 env.errors.add(escopo, file, linecontent, line_no, message)
 ```
+
+Para registrar warnings, a chamada é parecida:
+
+```ruby
+env.warnings.add(escopo, file, linecontent, line_no, message)
+```
+
 
 ## TODO
 
