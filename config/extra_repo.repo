@@ -1,18 +1,24 @@
 [ruby22]
 name=Ruby 2.2 repository
-baseurl=http://172.16.254.245/ruby22-prod/latest/x86_64/
+baseurl=http://packages.abril.com.br/ruby22-prod/latest/x86_64/
 enabled=1
 gpgcheck=0
 
 [ruby21]
 name=Ruby 2.1 repository
-baseurl=http://172.16.254.245/ruby21-prod/latest/x86_64/
+baseurl=http://packages.abril.com.br/ruby21-prod/latest/x86_64/
 enabled=1
 gpgcheck=0
 
 [ruby19]
 name=Ruby 1.9 repository
-baseurl=http://172.16.254.245/ruby19-prod/latest/x86_64/
+baseurl=http://packages.abril.com.br/ruby19-prod/latest/x86_64/
+enabled=1
+gpgcheck=0
+
+[ruby18]
+name=Ruby 1.8 repository
+baseurl=http://packages.abril.com.br/ruby18-prod/latest/x86_64/
 enabled=1
 gpgcheck=0
 
