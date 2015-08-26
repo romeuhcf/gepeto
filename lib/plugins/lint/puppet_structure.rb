@@ -7,7 +7,7 @@ class PuppetSrtucturePlugin < Gepeto::LintPlugin
 
     files.each do |entry|
       entry = File.expand_path(File.join(puppet, entry))
-      env.errors.add(:puppet, entry, nil,nil, "Deveria existir arquivo '#{entry}'") unless File.exists?(entry) and File.file?(entry)
+      env.warnings.add(:puppet, entry, nil,nil, "Deveria existir arquivo '#{entry}'") unless File.exists?(entry) and File.file?(entry)
     end
 
     dirs.each do |entry|
@@ -26,4 +26,3 @@ class PuppetSrtucturePlugin < Gepeto::LintPlugin
     end
   end
 end
-

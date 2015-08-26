@@ -11,22 +11,26 @@ module LintCommand
         plugins.each do |plugin|
           plugin.call(env, puppet, repo)
         end
-        print_result(env)
+        print_results(env)
       end
     end
   end
 
   protected
-  def print_result(env)
-    env.errors.each do |error|
-      puts [
-        'ERROR:'.red,
-        error.message.yellow,
-        error.scope.to_s.blue,
-        error.file.red,
-        error.lineno.to_s.cyan
-      ].join(' ')
-    end
+
+  def print_results(env)
+    env.errors.each { |error| print_result(error, '[ERROR]'.red) }
+    env.warnings.each { |warning| print_result(warning, '[WARNING]'.yellow) }
+  end
+
+  def print_result(error, log_type)
+    puts [
+      log_type,
+      error.message,
+      error.scope.to_s.blue,
+      error.file.red,
+      error.lineno.to_s.cyan
+    ].join(' ')
   end
 
   def print_compressed_result(env)
