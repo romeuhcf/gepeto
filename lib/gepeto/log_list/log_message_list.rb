@@ -1,4 +1,4 @@
-require 'gepeto/log_lists/log_message'
+require 'gepeto/log_list/log_message'
 
 module Gepeto
   class LogMessageList < Array

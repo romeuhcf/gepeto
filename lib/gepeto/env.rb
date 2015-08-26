@@ -1,4 +1,4 @@
-require 'gepeto/log_lists/log_message_list'
+require 'gepeto/log_list/log_message_list'
 
 module Gepeto
   class Env
