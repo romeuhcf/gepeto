@@ -16,6 +16,12 @@ baseurl=http://172.16.254.245/ruby19-prod/latest/x86_64/
 enabled=1
 gpgcheck=0
 
+[ruby18]
+name=Ruby 1.8 repository
+baseurl=http://packages.abril.com.br/ruby18-prod/latest/x86_64/
+enabled=1
+gpgcheck=0
+
 [tracelytics]
 name = "Tracelytics Repo"
 baseurl = "http://mirror.abrilcloud.com.br/tracelytics/el/6/x86_64/"
