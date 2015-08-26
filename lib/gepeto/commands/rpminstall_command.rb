@@ -22,7 +22,7 @@ module RpmInstallCommand
       run_cmds [
         "mkdir -p '#{yum_cache_dir}'",
         "cp -fv '#{dockerfile}' '#{buildfile}' '#{extrarepo_file}' '#{root_dir}'",
-        "cd '#{root_dir}' && docker build -f Dockerfile -t #{container_name} .",
+        "cd '#{root_dir}' && docker build -t #{container_name} .",
         [
           "cd '#{root_dir}' && ",
           "docker run --rm=true -ti ",

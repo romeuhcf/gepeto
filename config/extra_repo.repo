@@ -21,3 +21,9 @@ name = "Tracelytics Repo"
 baseurl = "http://mirror.abrilcloud.com.br/tracelytics/el/6/x86_64/"
 enabled = 1
 gpgcheck = 0
+
+[core-tools]
+name = "Abril - Core Tools"
+baseurl = "http://packages.abrilcloud.com.br/kojifiles/repos/core-tools-dev/latest/x86_64/"
+enabled = 1
+gpgcheck = 0
