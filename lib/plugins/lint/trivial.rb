@@ -5,6 +5,8 @@ end
 on(:puppet_line) do |env, scope, file, line, lineno|
   env.errors.add(:puppet, file, line, lineno, "Não deveria gerenciar usuários - mover para spec") if line =~ /useradd|adduser/
   env.errors.add(:puppet, file, line, lineno, "Não deveria gerenciar grupos - mover para spec") if line =~ /groupadd|addgroup/
+  env.errors.add(:puppet, file, line, lineno, "Não deveria referenciar ec2_tag_environment, utilizar $::environment ou via hiera") if line.include?('ec2_tag_environment')
+  env.errors.add(:puppet, file, line, lineno, "Não deveria referenciar interface de rede. Quem sabe utilizar * ou 0.0.0.0") if line.include?('ipaddress_eth0')
 end
 
 on(:repo_line) do |env, scope, file, line, lineno|
