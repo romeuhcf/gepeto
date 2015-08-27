@@ -2,14 +2,20 @@
 Passos a serem executados para se criar um pacote rpm, rodar o puppet e instalar o pacote numa máquina virtual docker
 * É necessário ter serviço docker rodando na localhost
 * Projeto para referência: git clone git@bitbucket.org:abrilmdia/exame-api.git
+* puppet 3 novo: git@bitbucket.org:abrilmdia/puppet-manifests.git (CRIE SEU FORK E FAÇA PULL REQUEST)
 
 ## Passo 1
 
 ### Criar Makefile
 Criar o arquivo Makefile na raiz do projeto em questão se não existir, baseado no projeto exame-api
 
+- SUGESTÃO:
+Colocar a linha no prepare-spec logo antes de escrever o changelog (isto faz com que nao tenha mais erro de changelog quando for gerar o build)
+echo '%changelog' >> $(WORKDIR)/$(SPECFILE)
+
 ### Criar arquivo .spec
 Criar arquivo .spec (spec file) na raiz do projeto tendo como modelo base o do exame-api ou alterar o existente para o modelo novo (/opt/abril)
+
 
 ## Passo 2
 
@@ -39,3 +45,10 @@ Geração e instalação do RPM apartir do repositorio indicado
 
 - Neste ponto, se tudo correr bem, você acabará dentro da maquina virtual com o pacote instalado
 - Testar: rpm -qa | grep NOME DO PROJETO e verificar se foi instalado conforme gerado.
+
+
+## Passo 4
+
+
+
+
