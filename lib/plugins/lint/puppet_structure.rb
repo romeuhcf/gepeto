@@ -1,13 +1,18 @@
 class PuppetSrtucturePlugin < Gepeto::LintPlugin
   def call(env, puppet, repo)
     modulename = File.basename(puppet)
-
-    files = ['manifests/init.pp', 'manifests/install.pp', "../../manifests/#{modulename}.pp", "../../hiera/#{modulename}.yaml"]
+    forbidden_files = [  "../../manifests/#{modulename}.pp"  ]
+    required_files = ['manifests/init.pp', 'manifests/install.pp', "../../hiera/#{modulename}.yaml"]
     dirs = ['.', 'manifests']
 
-    files.each do |entry|
+    required_files.each do |entry|
       entry = File.expand_path(File.join(puppet, entry))
       env.warnings.add(:puppet, entry, nil,nil, "Deveria existir arquivo '#{entry}'") unless File.exists?(entry) and File.file?(entry)
+    end
+
+    forbidden_files.each do |entry|
+      entry = File.expand_path(File.join(puppet, entry))
+      env.warnings.add(:puppet, entry, nil,nil, "Não poderia existir arquivo '#{entry}'") if File.exists?(entry) and File.file?(entry)
     end
 
     dirs.each do |entry|
