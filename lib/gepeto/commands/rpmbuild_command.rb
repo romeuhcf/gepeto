@@ -29,8 +29,10 @@ module RpmBuildCommand
         "-v #{repo_root_path}:/root/rpmbuild/SOURCES/code",
         "-v #{bundler_cache_dir}:/bundler_cache_dir",
         "-v #{yum_cache_dir}:/var/cache/yum/",
+        "-v #{container_path}:/container_path",
         "#{app_name}.rpmbuild"
-      ].join(' ')
+      ].join(' '),
+      "find #{container_path} # Arquivos gerados:"
     ]
   end
 end

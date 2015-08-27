@@ -21,7 +21,7 @@ if puppet apply -tvd --modulepath=$MODULES_PATH -e"include $PUPPET_MODULE"; then
     yum -Uvh "$RPM_TO_INSTALL_AFTER"
   fi
 else
-  echo "Erro aplicando puppet"
+  echo "Erro aplicando puppet... existstatus: $?"
 fi
 
 echo 
