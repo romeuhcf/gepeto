@@ -14,5 +14,4 @@ echo RPMBUILD
 echo "-------------------------------------------------------------------------------"
 rpmbuild -ba *.spec
 echo "-------------------------------------------------------------------------------"
-mv /root/rpmbuild/SOURCES/code/*.bz2 /container_path
-mv /root/rpmbuild/RPMS/*/*.rpm /container_path
+cp /root/rpmbuild/RPMS/*/*.rpm /root/rpmbuild/SOURCES/code #/dist
