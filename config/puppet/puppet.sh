@@ -13,15 +13,17 @@ MODULES_PATH="$PUPPET_ROOT/modules"
 
 if puppet apply -tvd --modulepath=$MODULES_PATH -e"include $PUPPET_MODULE"; then
   echo "Sucesso aplicando puppet"
-  if [ -n "$RPM_TO_INSTALL_AFTER" ]; then
-    echo
-    echo "-----------------------------------------------------------------------------"
-    echo "- instalando rpm $RPM_TO_INSTALL_AFTER"
-    echo "-----------------------------------------------------------------------------"
-    yum -Uvh "$RPM_TO_INSTALL_AFTER"
-  fi
 else
-  echo "Erro aplicando puppet... existstatus: $?"
+  echo "Puppet saiu com status: $?"
+fi
+
+
+echo
+echo "-----------------------------------------------------------------------------"
+echo "- instalando rpm $RPM_TO_INSTALL_AFTER"
+echo "-----------------------------------------------------------------------------"
+if [ -n "$RPM_TO_INSTALL_AFTER" ]; then
+  yum install -y "$RPM_TO_INSTALL_AFTER"
 fi
 
 echo 
