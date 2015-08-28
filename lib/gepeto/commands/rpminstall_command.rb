@@ -10,6 +10,7 @@ module RpmInstallCommand
   end
 
   protected
+
   def do_rpminstall(rpm_path, repo_root_path)
     repository = Gepeto::Repository.new(repo_root_path)
 
@@ -17,7 +18,7 @@ module RpmInstallCommand
     rpm_dir = File.dirname(rpm_path)
     dockerfile     = File.join(gepeto_root, "config/rpminstall/Dockerfile")
     buildfile      = File.join(gepeto_root, "config/rpminstall/entrypoint.sh")
-    yum_cache_dir  = File.join("/tmp/cache/yum")
+    yum_cache_dir  = File.join(gepeto_root, "var/cache/yum")
     container_name = File.basename(rpm_path).gsub(/-\d.*/,'' ) + '.rpminstall'
 
     Dir.mktmpdir do |root_dir|

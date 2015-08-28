@@ -13,7 +13,7 @@ module PuppetCommand
     puppet_root    = File.expand_path(puppet_root)
     dockerfile     = File.join(gepeto_root, "config/puppet/puppet.dockerfile")
     buildfile      = File.join(gepeto_root, "config/puppet/puppet.sh")
-    yum_cache_dir  = File.join("/tmp/cache/yum")
+    yum_cache_dir  = File.join(gepeto_root, "var/cache/yum")
     rpm_path_after = rpm_path_after && File.expand_path(rpm_path_after)
 
     facter_product  = puppet_module

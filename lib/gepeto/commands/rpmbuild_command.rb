@@ -15,11 +15,11 @@ module RpmBuildCommand
     repository = Gepeto::Repository.new(repo_root_path)
 
     app_name       = repository.app_name
-    bundler_cache_dir  = File.join("/tmp/cache/bundler", app_name)
-    yum_cache_dir  = File.join("/tmp/cache/yum")
+    bundler_cache_dir  = File.join(gepeto_root, "var/cache/bundler", app_name)
+    yum_cache_dir  = File.join(gepeto_root, "var/cache/yum")
     dockerfile     = File.join(gepeto_root, "config/rpmbuild/Dockerfile")
     buildfile      = File.join(gepeto_root, "config/rpmbuild/build.sh")
-    container_path = File.join("/tmp/gepeto/#{app_name}")
+    container_path = File.join(gepeto_root, "var/gepeto/#{app_name}")
     run_cmds [
       "mkdir -p '#{container_path}'",
       "mkdir -p '#{bundler_cache_dir}'",

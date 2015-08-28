@@ -16,6 +16,9 @@ echo '%changelog' >> $(WORKDIR)/$(SPECFILE)
 ### Criar arquivo .spec
 Criar arquivo .spec (spec file) na raiz do projeto tendo como modelo base o do exame-api ou alterar o existente para o modelo novo (/opt/abril)
 
+### Para usar ruby 1.8
+Criar um arquivo .extra_repos com `ruby18` na primeira linha. Isso irá adicionar o repositório correto para a construção e instalação do pacote.
+
 
 ## Passo 2
 
@@ -32,7 +35,7 @@ Geração do RPM apartir do repositorio indicado
 
     ruby bin/cli.rb rpmbuild <REPOSITORY_DIR>
 
-- O pacote é salvo na sua pasta local /tmp/gepeto/NOME DO PROJETO
+- O pacote é salvo na sua pasta var do projeto gepeto
 - Se algum pacote (BuildRequire) da sua .spec não for encontrado, editar o arquivo extra_repo.repo neste projeto e adicionar seu repo conforme exemplos.
 - Se der erro de changelog, apagar tudo abaixo de %changelog na sua spec (manter uma linha vazia abaixo).
 - Continuar executando o rpmbuild até que o pacote seja gerado sem problemas. (O pacote é gerado na raiz do projeto em questão).
@@ -41,7 +44,7 @@ Geração do RPM apartir do repositorio indicado
 ### Rpm install
 Geração e instalação do RPM apartir do repositorio indicado
 
-    ruby bin/cli.rb rpminstall <RPM_FILE>
+    ruby bin/cli.rb rpminstall <RPM_FILE> <REPOSITORY_DIR>
 
 - Neste ponto, se tudo correr bem, você acabará dentro da maquina virtual com o pacote instalado
 - Testar: rpm -qa | grep NOME DO PROJETO e verificar se foi instalado conforme gerado.
