@@ -1,3 +1,4 @@
+require 'gepeto/repository'
 module RpmInstallCommand
   def self.included(base)
     base.class_eval do
@@ -10,7 +11,7 @@ module RpmInstallCommand
 
   protected
   def do_rpminstall(rpm_path, repo_root_path)
-    repository = Repository.new(repo_root_path)
+    repository = Gepeto::Repository.new(repo_root_path)
 
     rpm_path = File.expand_path(rpm_path)
     rpm_dir = File.dirname(rpm_path)

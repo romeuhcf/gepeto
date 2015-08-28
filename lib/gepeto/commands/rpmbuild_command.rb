@@ -1,4 +1,4 @@
-require_relative 'repository'
+require 'gepeto/repository'
 
 module RpmBuildCommand
   def self.included(base)
@@ -12,7 +12,7 @@ module RpmBuildCommand
 
   protected
   def do_rpmbuild(repo_root_path)
-    repository = Repository.new(repo_root_path)
+    repository = Gepeto::Repository.new(repo_root_path)
 
     app_name       = repository.app_name
     bundler_cache_dir  = File.join("/tmp/cache/bundler", app_name)
@@ -28,14 +28,13 @@ module RpmBuildCommand
       "cd '#{container_path}' && docker build -t #{app_name}.rpmbuild .",
       [
         "docker run --rm=true -t",
-        "-v #{repository.root_path}:/root/rpmbuild/SOURCES/code",
+        "-v #{repo_root_path}:/code",
         "-v #{bundler_cache_dir}:/bundler_cache_dir",
         "-v #{yum_cache_dir}:/var/cache/yum/",
+        "-v #{container_path}:/container_path",
         "-e 'EXTRA_REPOS=#{repository.extra_repo(gepeto_root).join(' ')}'",
         "#{app_name}.rpmbuild"
       ].join(' '),
-      "mv -f #{repository.root_path}/*.rpm #{container_path}",
-      "mv -f #{repository.root_path}/*.bz2 #{container_path}",
       "find #{container_path} # Arquivos gerados:"
     ]
   end
