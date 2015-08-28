@@ -9,7 +9,7 @@ uma ferramenta de validação de regras de puppet para os projetos da Abril com 
 ## Commandos Principais
 
 ### Rpm build
-Geração do RPM da do repositorio indicado
+Geração do RPM do repositório indicado
 
     ruby bin/cli.rb rpmbuild <REPOSITORY_DIR>
 
@@ -24,6 +24,26 @@ Exemplo:
 Dependências:
 
 * É necessário ter serviço docker rodando na localhost
+
+
+### Rpm install
+Instalação do RPM
+
+    ruby bin/cli.rb rpminstall <RPM_PATH> <REPOSITORY_DIR>
+
+Onde:
+
+* RPM_PATH: caminho do arquivo RPM gerado com o comando rpmbuild
+* REPOSITORY_DIR: caminho do repositorio do projeto a ser construido
+
+Exemplo:
+
+    ruby  bin/cli.rb rpminstall ./var/projeto/projeto-1.0.0.el6.rpm ~/projeto/
+
+Dependências:
+
+* É necessário ter serviço docker rodando na localhost
+
 
 ### Puppet
 Provisionamento de teste de puppet em docker

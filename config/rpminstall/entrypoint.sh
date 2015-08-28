@@ -15,6 +15,9 @@ done > /etc/yum.repos.d/abril.repo
 echo "Extra Repos"
 cat /etc/yum.repos.d/abril.repo
 
+echo 'validando presença de arquivo RPM'
+ls /rpminstall/
+
 echo "-----------------------------------------------------------------------------"
 echo "- instalando rpm $RPM_TO_INSTALL"
 echo "-----------------------------------------------------------------------------"
