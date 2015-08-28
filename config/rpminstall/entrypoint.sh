@@ -1,5 +1,20 @@
-#!/bin/bash 
-set -e 
+#!/bin/bash
+set -e
+
+for repo in $EXTRA_REPOS
+do
+  echo "[$repo]
+name=$repo repository
+baseurl=http://packages.abril.com.br/$repo-prod/latest/x86_64/
+enabled=1
+gpgcheck=0
+
+"
+done > /etc/yum.repos.d/abril.repo
+
+echo "Extra Repos"
+cat /etc/yum.repos.d/abril.repo
+
 echo "-----------------------------------------------------------------------------"
 echo "- instalando rpm $RPM_TO_INSTALL"
 echo "-----------------------------------------------------------------------------"
@@ -9,4 +24,4 @@ echo "--------------------------------------------------------------------------
 echo "- abrindo shell..."
 echo "-----------------------------------------------------------------------------"
 
-bash 
+bash

@@ -1,35 +1,4 @@
-[ruby22]
-name=Ruby 2.2 repository
-baseurl=http://packages.abril.com.br/ruby22-prod/latest/x86_64/
-enabled=1
-gpgcheck=0
-
-[ruby21]
-name=Ruby 2.1 repository
-baseurl=http://packages.abril.com.br/ruby21-prod/latest/x86_64/
-enabled=1
-gpgcheck=0
-
-[ruby19]
-name=Ruby 1.9 repository
-baseurl=http://packages.abril.com.br/ruby19-prod/latest/x86_64/
-enabled=1
-gpgcheck=0
-
-[ruby18]
-name=Ruby 1.8 repository
-baseurl=http://packages.abril.com.br/ruby18-prod/latest/x86_64/
-enabled=1
-gpgcheck=0
-
-[tracelytics]
-name = "Tracelytics Repo"
-baseurl = "http://mirror.abrilcloud.com.br/tracelytics/el/6/x86_64/"
-enabled = 1
-gpgcheck = 0
-
-[core-tools]
-name = "Abril - Core Tools"
-baseurl = "http://packages.abrilcloud.com.br/kojifiles/repos/core-tools-dev/latest/x86_64/"
-enabled = 1
-gpgcheck = 0
+ruby22
+ruby21
+ruby19
+core-tools-dev
