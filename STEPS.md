@@ -30,7 +30,7 @@ $ git clone ssh://ec2-user@git.puppetmaster-desenv.abrilcloud.com.br:5022/opt/pu
 
 ## Passo 3
 
-### Rpm build
+### GEPETO: Rpm build
 Geração do RPM apartir do repositorio indicado
 
     ruby bin/cli.rb rpmbuild <REPOSITORY_DIR>
@@ -41,7 +41,7 @@ Geração do RPM apartir do repositorio indicado
 - Continuar executando o rpmbuild até que o pacote seja gerado sem problemas. (O pacote é gerado na raiz do projeto em questão).
 
 
-### Rpm install
+### GEPETO: Rpm install
 Geração e instalação do RPM apartir do repositorio indicado
 
     ruby bin/cli.rb rpminstall <RPM_FILE> <REPOSITORY_DIR>
@@ -52,6 +52,18 @@ Geração e instalação do RPM apartir do repositorio indicado
 
 ## Passo 4
 
+### Projeto puppet-manifests
 
+## Criar o modulo no puppet referente a seu projeto tendo como modelo o modulo exameapi
+
+## Passo 5
+
+### GEPETO: puppet lint
+
+## Rodar o lint e arrumar os erros apresentados
+    ruby bin/cli.rb lint <MODULE_DIR> <REPOSITORY_DIR>
+
+## rodar o puppet para instalar o ultimo package gerado e entrar na maquina
+    ruby bin/cli.rb puppet <PUPPET_DIR> <PUPPET_MODULE> [app_environment] [rpm a ser instalado no fim]
 
 
