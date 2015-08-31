@@ -9,7 +9,7 @@ module PuppetCommand
   end
 
   protected
-  def do_puppet(puppet_root, puppet_module, app_environment = 'stage', rpm_path_after = nil)
+  def do_puppet(puppet_root, puppet_module, app_environment = 'stage', rpm_path_after = nil, facter_role = nil)
     puppet_root    = File.expand_path(puppet_root)
     dockerfile     = File.join(gepeto_root, "config/puppet/puppet.dockerfile")
     buildfile      = File.join(gepeto_root, "config/puppet/puppet.sh")
@@ -29,6 +29,7 @@ module PuppetCommand
           "docker run --rm=true -ti ",
           "-e PUPPET_MODULE='#{puppet_module}'",
           "-e FACTER_product='#{facter_product}'",
+          (facter_role && "-e FACTER_role='#{facter_role}'"),
           "-e FACTER_environment='#{facter_environment}'",
           "-v '#{puppet_root}:/etc/puppet'",
           "-v #{yum_cache_dir}:/var/cache/yum/",
