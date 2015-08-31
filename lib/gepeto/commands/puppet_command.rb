@@ -19,7 +19,7 @@ module PuppetCommand
     facter_product  = puppet_module
     facter_environment = app_environment
 
-    Dir.mktmpdir do |root_dir|
+    Dir.mktmpdir(nil, "#{gepeto_root}/var") do |root_dir|
       run_cmds [
         "mkdir -p '#{yum_cache_dir}'",
         "cp -f '#{dockerfile}' '#{buildfile}' '#{root_dir}'",
