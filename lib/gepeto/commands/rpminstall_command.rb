@@ -1,17 +1,20 @@
 require 'gepeto/repository'
+require 'gepeto/run_commands'
 module RpmInstallCommand
-  def self.included(base)
-    base.class_eval do
-      desc "rpminstall <RPM_PATH> <REPO_DIR>", "Instala rpm indicado em container docker"
-      def rpminstall(*args)
-        do_rpminstall(*args)
-      end
+  include RunCommands
+  def validate(rpm_path, repo_root_path)
+    fail('Diretório do repo não encotrado') unless File.directory?(repo_root_path)
+    specs =  Dir[File.join(repo_root_path, '*.spec')]
+    if specs.size > 1
+      fail('Mais de um specfile encontrado no repositório')
+    elsif specs.size < 1
+      fail('Specfile NÃO encontrado no repositório')
     end
+
+    fail("RPM não encontrado") unless File.file?(rpm_path)
   end
 
-  protected
-
-  def do_rpminstall(rpm_path, repo_root_path)
+  def call(rpm_path, repo_root_path)
     repository = Gepeto::Repository.new(repo_root_path)
     repo_root_path = File.expand_path(repo_root_path)
 
@@ -40,3 +43,23 @@ module RpmInstallCommand
     end
   end
 end
+
+desc "<RPM> Provision container and install RPM package".green
+command :rpminstall do |c|
+  c.action do |global_options,options,args|
+  c.desc "When informed, use its .extra_repo file to set on yum.repos" # TODO trocar por lista de repos como string e não arquivo para facilitar instrumentação por outros programas
+
+  c.flag [:p,:puppet_dir], :type => String
+    help_now!("Extra arguments found: '#{args.inspect}'".red.on_yellow) if args.size > 1
+    help_now!("Requirement arguments not found: '#{args.inspect}'".red.on_yellow) if args.size < 1
+    params = [args.shift, options[:repo_dir]]
+    cmd = RpmBuildCommand.new
+    begin
+      cmd.validate(*params)
+    rescue
+      help_now!($!.message.red.on_yellow)
+    end
+    cmd.call(*params)
+  end
+end
+

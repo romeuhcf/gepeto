@@ -14,19 +14,49 @@ gpgcheck=0
 done > /etc/yum.repos.d/abril.repo
 
 # prepare stuff
-cp -rfv /code /root/rpmbuild/SOURCES/
+cp -rf /code /root/rpmbuild/SOURCES/
 cd /root/rpmbuild/SOURCES/code
-make sources
+echo
+echo
+echo
+echo "-------------------------------------------------------------------------------"
+echo REMOTE: $(git remote -v | grep fetch)
+echo BRANCH: $(git checkout master; git branch)
+echo INFO:   $(make info)
+echo TAGS:   $(git describe --abbrev=0 --tags)
+echo "-------------------------------------------------------------------------------"
+echo
+echo
+echo
+echo "-------------------------------------------------------------------------------"
+echo "Making sources"
+echo "-------------------------------------------------------------------------------"
+make sources 
 cp *.spec /root/rpmbuild/SPECS
 cp -v *.bz2 /root/rpmbuild/SOURCES
-# generate rpm
+echo "-------------------------------------------------------------------------------"
+echo
+echo
+echo
+echo "-------------------------------------------------------------------------------"
+echo "Installing build dependencies"
+echo "-------------------------------------------------------------------------------"
 cd /root/rpmbuild/SPECS
 yum-builddep -y *.spec
 echo "-------------------------------------------------------------------------------"
-echo RPMBUILD
+echo
+echo
+echo
+echo "-------------------------------------------------------------------------------"
+echo Generating package with rpmbuild 
 echo "-------------------------------------------------------------------------------"
 rpmbuild -ba *.spec
 echo "-------------------------------------------------------------------------------"
-ls /root/rpmbuild/RPMS/*/*.rpm
-echo cp -fv /root/rpmbuild/RPMS/*/*.rpm /container_path
+echo
+echo
+echo
+echo "-------------------------------------------------------------------------------"
+echo Making RPM available
+echo "-------------------------------------------------------------------------------"
 cp -fv /root/rpmbuild/RPMS/*/*.rpm /container_path
+echo "-------------------------------------------------------------------------------"

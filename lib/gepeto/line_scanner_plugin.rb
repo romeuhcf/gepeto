@@ -7,12 +7,12 @@ module Gepeto
       all_lines_from_dir(puppet) { |file, line, lineno|
         emit_event(:any_line, env, :puppet, file, line, lineno)
         emit_event(:puppet_line, env, :puppet, file, line, lineno)
-      }
+      } if puppet
 
       all_lines_from_dir(repo) { |file, line, lineno|
         emit_event(:line, env, :repo, file, line, lineno)
         emit_event(:repo_line, env, :repo, file, line, lineno)
-      }
+      } if repo
     end
 
     protected

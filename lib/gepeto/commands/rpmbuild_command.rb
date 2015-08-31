@@ -1,17 +1,20 @@
 require 'gepeto/repository'
+require 'gepeto/run_commands'
 
-module RpmBuildCommand
-  def self.included(base)
-    base.class_eval do
-      desc "rpmbuild <REPO_DIR>", "Usa docker para criar rpm como o koji faria"
-      def rpmbuild(*args)
-        do_rpmbuild(*args)
-      end
+class RpmBuildCommand
+  include RunCommands
+
+  def validate(repo_root_path)
+    fail('Diretório do repo não encotrado') unless File.directory?(repo_root_path)
+    specs =  Dir[File.join(repo_root_path, '*.spec')]
+    if specs.size > 1
+      fail('Mais de um specfile encontrado no repositório')
+    elsif specs.size < 1
+      fail('Specfile NÃO encontrado no repositório')
     end
   end
 
-  protected
-  def do_rpmbuild(repo_root_path)
+  def call(repo_root_path)
     repository = Gepeto::Repository.new(repo_root_path)
     repo_root_path = File.expand_path(repo_root_path)
 
@@ -40,3 +43,20 @@ module RpmBuildCommand
     ]
   end
 end
+
+desc "<REPO_DIR> Build RPM package just like KOJI would do".green
+command :rpmbuild do |c|
+  c.action do |global_options,options,args|
+    help_now!("Extra arguments found: '#{args.inspect}'".red.on_yellow) if args.size > 1
+    help_now!("Requirement arguments not found: '#{args.inspect}'".red.on_yellow) if args.size < 1
+    params = [args.shift]
+    cmd = RpmBuildCommand.new
+    begin
+      cmd.validate(*params)
+    rescue
+      help_now!($!.message.red.on_yellow)
+    end
+    cmd.call(*params)
+  end
+end
+

@@ -1,15 +1,15 @@
-module PuppetCommand
-  def self.included(base)
-    base.class_eval do
-      desc "puppet <PUPPET_DIR> <PUPPET_MODULE> [APP_ENVIRONMENT (stage|production|whatever)] [RPM_TO_INSTALL_AFTER]", "Usa docker para provisionar maquina com puppet"
-      def puppet(*args)
-        do_puppet(*args)
-      end
-    end
+require 'tmpdir'
+require 'gepeto/run_commands'
+class PuppetCommand
+  include RunCommands
+
+  def validate(puppet_root, puppet_module, app_environment = 'stage', rpm_path_after = nil, facter_role = nil)
+    fail('Diretório do puppet não encotrado') unless File.directory?(puppet_root)
+    fail("Favor indicar o módulo puppet a ser aplicado") if puppet_module.to_s.empty?
+    fail("RPM não encontrado '#{rpm_path_after}'") if rpm_path_after and !File.file?(rpm_path_after)
   end
 
-  protected
-  def do_puppet(puppet_root, puppet_module, app_environment = 'stage', rpm_path_after = nil, facter_role = nil)
+  def call(puppet_root, puppet_module, app_environment = 'stage', rpm_path_after = nil, facter_role = nil)
     puppet_root    = File.expand_path(puppet_root)
     dockerfile     = File.join(gepeto_root, "config/puppet/puppet.dockerfile")
     buildfile      = File.join(gepeto_root, "config/puppet/puppet.sh")
@@ -41,3 +41,30 @@ module PuppetCommand
     end
   end
 end
+
+desc "<PUPPET_DIR> <PRODUCT|PUPPET_MODULE> Provision a docker container and apply informed puppet on it".green
+command :puppet do |c|
+  c.desc "facter 'environment' for hiera/puppet"
+  c.flag [:e,:environment], type: String, default_value: 'stage'
+
+  c.desc "facter 'role' hiera/puppet"
+  c.flag [:r,:role], type: String, default_value: 'web'
+
+  c.desc "optional RPM file to install after puppet run"
+  c.flag [:p,:rpm], type: String
+
+  c.action do |global_options,options,args|
+    help_now!("Extra arguments found: '#{args.inspect}'".red.on_yellow) if args.size > 2
+    help_now!("Requirement arguments not found: '#{args.inspect}'".red.on_yellow) if args.size < 2
+    params = [args.shift, args.shift, options[:stage], options[:rpm], options[:role]]
+    cmd = PuppetCommand.new
+    begin
+      cmd.validate(*params)
+    rescue
+      help_now!($!.message.red.on_yellow)
+    end
+    cmd.call(*params)
+
+  end
+end
+

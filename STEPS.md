@@ -61,9 +61,9 @@ Geração e instalação do RPM apartir do repositorio indicado
 ### GEPETO: puppet lint
 
 ## Rodar o lint e arrumar os erros apresentados
-    ruby bin/cli.rb lint <MODULE_DIR> <REPOSITORY_DIR>
+    ruby bin/cli.rb lint -p <MODULE_DIR> -r <REPOSITORY_DIR>
 
 ## rodar o puppet para instalar o ultimo package gerado e entrar na maquina
-    ruby bin/cli.rb puppet <PUPPET_DIR> <PUPPET_MODULE> [app_environment] [rpm a ser instalado no fim]
+    ruby bin/cli.rb puppet <PUPPET_DIR> <PUPPET_MODULE> -e [app_environment] -p [rpm a ser instalado no fim]
 
 
