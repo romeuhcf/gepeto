@@ -13,6 +13,7 @@ module RpmBuildCommand
   protected
   def do_rpmbuild(repo_root_path)
     repository = Gepeto::Repository.new(repo_root_path)
+    repo_root_path = File.expand_path(repo_root_path)
 
     app_name       = repository.app_name
     bundler_cache_dir  = File.join(gepeto_root, "var/cache/bundler", app_name)

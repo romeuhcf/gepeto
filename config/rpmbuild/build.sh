@@ -14,7 +14,7 @@ gpgcheck=0
 done > /etc/yum.repos.d/abril.repo
 
 # prepare stuff
-cp -rf /code /root/rpmbuild/SOURCES/
+cp -rfv /code /root/rpmbuild/SOURCES/
 cd /root/rpmbuild/SOURCES/code
 make sources
 cp *.spec /root/rpmbuild/SPECS

@@ -30,7 +30,7 @@ $ git clone ssh://ec2-user@git.puppetmaster-desenv.abrilcloud.com.br:5022/opt/pu
 
 ## Passo 3
 
-### Rpm build
+### GEPETO: Rpm build
 Geração do RPM apartir do repositorio indicado
 
     ruby bin/cli.rb rpmbuild <REPOSITORY_DIR>
@@ -41,7 +41,7 @@ Geração do RPM apartir do repositorio indicado
 - Continuar executando o rpmbuild até que o pacote seja gerado sem problemas. (O pacote é gerado na raiz do projeto em questão).
 
 
-### Rpm install
+### GEPETO: Rpm install
 Geração e instalação do RPM apartir do repositorio indicado
 
     ruby bin/cli.rb rpminstall <RPM_FILE> <REPOSITORY_DIR>
@@ -52,6 +52,13 @@ Geração e instalação do RPM apartir do repositorio indicado
 
 ## Passo 4
 
+### Projeto puppet-manifests
+### GEPETO: puppet lint
+
+
+## Passo 5
+
+### GEPETO: puppet
 
 
 
