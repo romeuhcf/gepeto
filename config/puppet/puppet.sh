@@ -23,7 +23,7 @@ echo "--------------------------------------------------------------------------
 echo "- instalando rpm $RPM_TO_INSTALL_AFTER"
 echo "-----------------------------------------------------------------------------"
 if [ -n "$RPM_TO_INSTALL_AFTER" ]; then
-  yum install -y "$RPM_TO_INSTALL_AFTER"
+  yum install -y "$RPM_TO_INSTALL_AFTER"  || true
 fi
 
 echo 

@@ -65,5 +65,5 @@ Geração e instalação do RPM apartir do repositorio indicado
 
 ## rodar o puppet para instalar o ultimo package gerado e entrar na maquina
     ruby bin/cli.rb puppet <PUPPET_DIR> <PUPPET_MODULE> -e [app_environment] -p [rpm a ser instalado no fim]
-
+    ruby bin/cli.rb puppet ~/puppet-manifests/ meuprojeto -e production -p ~/meuprojeto.rpm
 
