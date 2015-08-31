@@ -53,12 +53,17 @@ Geração e instalação do RPM apartir do repositorio indicado
 ## Passo 4
 
 ### Projeto puppet-manifests
-### GEPETO: puppet lint
 
+## Criar o modulo no puppet referente a seu projeto tendo como modelo o modulo exameapi
 
 ## Passo 5
 
-### GEPETO: puppet
+### GEPETO: puppet lint
 
+## Rodar o lint e arrumar os erros apresentados
+    ruby bin/cli.rb lint <MODULE_DIR> <REPOSITORY_DIR>
+
+## rodar o puppet para instalar o ultimo package gerado e entrar na maquina
+    ruby bin/cli.rb puppet <PUPPET_DIR> <PUPPET_MODULE> [app_environment] [rpm a ser instalado no fim]
 
 

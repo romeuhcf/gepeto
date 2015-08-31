@@ -13,6 +13,7 @@ module RpmInstallCommand
 
   def do_rpminstall(rpm_path, repo_root_path)
     repository = Gepeto::Repository.new(repo_root_path)
+    repo_root_path = File.expand_path(repo_root_path)
 
     rpm_path = File.expand_path(rpm_path)
     rpm_dir = File.dirname(rpm_path)
