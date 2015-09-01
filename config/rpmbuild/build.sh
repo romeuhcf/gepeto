@@ -21,7 +21,7 @@ echo
 echo
 echo "-------------------------------------------------------------------------------"
 echo REMOTE: $(git remote -v | grep fetch)
-echo BRANCH: $(git checkout master; git branch)
+echo BRANCH: $(git rev-parse --abbrev-ref HEAD)
 echo INFO:   $(make info)
 echo TAGS:   $(git describe --abbrev=0 --tags)
 echo "-------------------------------------------------------------------------------"
