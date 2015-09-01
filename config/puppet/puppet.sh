@@ -12,7 +12,7 @@ cp "$PUPPET_ROOT/hiera.yaml.sample" "$PUPPET_ROOT/hiera.yaml"
 MODULES_PATH="$PUPPET_ROOT/modules"
 INCLUDED_CLASS="$PUPPET_MODULE"
 
-if ["$FACTER_role" != 'web' ]; then
+if [ "$FACTER_role" != 'web' ]; then
  INCLUDED_CLASS="$INCLUDED_CLASS::$FACTER_role"
  echo "Facter role provided. Including class $INCLUDED_CLASS"
 fi
