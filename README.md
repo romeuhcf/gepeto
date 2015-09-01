@@ -29,12 +29,23 @@ Dependências:
 ### Rpm install
 Instalação do RPM
 
-    ruby bin/cli.rb rpminstall <RPM_PATH> <REPOSITORY_DIR>
+    ruby bin/cli.rb rpminstall <RPM_PATH> -r <REPOSITORY_DIR>
 
 Onde:
 
 * RPM_PATH: caminho do arquivo RPM gerado com o comando rpmbuild
 * REPOSITORY_DIR: caminho do repositorio do projeto a ser construido
+
+Parâmetros:
+
+-r: diretório do repositório
+
+
+Extra Repos
+===========
+
+O projeto deve ter um arquivo .extra_repos com os repositórios extras a serem incluídos. Os projetos
+com ruby 1.8, por exemplo, precisam desse arquivo com a linha `ruby18`.
 
 Exemplo:
 
@@ -54,9 +65,21 @@ Onde:
 * PUPPET_DIR: caminho da raiz do puppet repository clonado.
 * PUPPET_MODULE: nome do modulo do puppet a ser provisonado.
 
+Parâmetros:
+
+-e: environment
+    ex.: `-e production` (`stage` é o padrão)
+
+-r: role:
+    ex.: `-e cms`
+
+-p: rpm:
+    Path do rpm gerado (ele é gerado, por padrão, dentro do projeto gepeto)
+    ex.: `-p ./var/meuprojeto/projeto1.0.0.0-1.el6.abril.x86_64.rpm`
+
 Exemplo:
 
-    ruby bin/cli.rb puppet ~/puppet-manifests/ meuprojeto production
+    ruby bin/cli.rb puppet ~/puppet-manifests/ meuprojeto -e production -r cron
 
 Dependências:
 

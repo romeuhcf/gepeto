@@ -59,4 +59,3 @@ command :rpminstall do |c|
     cmd.call(*params)
   end
 end
-
