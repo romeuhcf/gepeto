@@ -3,7 +3,7 @@ module Gepeto
     attr_accessor :repo_root_path
 
     def initialize(repo_root_path)
-      self.repo_root_path = File.expand_path(repo_root_path)
+      self.repo_root_path = repo_root_path && File.expand_path(repo_root_path)
     end
 
     def app_name
