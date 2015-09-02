@@ -56,7 +56,7 @@ command :puppet do |c|
   c.action do |global_options,options,args|
     help_now!("Extra arguments found: '#{args.inspect}'".red.on_yellow) if args.size > 2
     help_now!("Requirement arguments not found: '#{args.inspect}'".red.on_yellow) if args.size < 2
-    params = [args.shift, args.shift, options[:stage], options[:rpm], options[:role]]
+    params = [args.shift, args.shift, options[:environment], options[:rpm], options[:role]]
     cmd = PuppetCommand.new
     begin
       cmd.validate(*params)

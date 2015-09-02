@@ -5,6 +5,7 @@ class RpmInstallCommand
   def validate(rpm_path, repo_root_path)
     if repo_root_path
       fail('Diretório do repo não encotrado') unless File.directory?(repo_root_path)
+      fail("Arquivo .extra_repos nao encontrado em #{repo_root_path}") unless File.file?(File.join(repo_root_path, '.extra_repos'))
     end
 
     fail("RPM não encontrado") unless File.file?(rpm_path)
@@ -40,9 +41,10 @@ end
 
 desc "<RPM> Provision container and install RPM package".green
 command :rpminstall do |c|
+  c.desc "When informed, use its .extra_repo file to set on yum.repos" # TODO trocar por lista de repos como string e não arquivo para facilitar instrumentação por outros programas
+  c.flag [:r,:repo_dir], :type => String
+
   c.action do |global_options,options,args|
-    c.desc "When informed, use its .extra_repo file to set on yum.repos" # TODO trocar por lista de repos como string e não arquivo para facilitar instrumentação por outros programas
-    c.flag [:p,:puppet_dir], :type => String
     help_now!("Extra arguments found: '#{args.inspect}'".red.on_yellow) if args.size > 1
     help_now!("Requirement arguments not found: '#{args.inspect}'".red.on_yellow) if args.size < 1
 
@@ -57,4 +59,3 @@ command :rpminstall do |c|
     cmd.call(*params)
   end
 end
-
