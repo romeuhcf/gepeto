@@ -37,6 +37,6 @@ echo "Abrindo shell..."
 echo "-----------------------------------------------------------------------------"
 echo
 echo "caso deseje rodar o puppet manualmente, usar o comando: "
-echo "  puppet apply -tvd --modulepath=$MODULES_PATH -e'include $PUPPET_MODULE'"
+echo "  puppet apply -tvd --modulepath=$MODULES_PATH -e'include $INCLUDED_CLASS'"
 echo
 bash

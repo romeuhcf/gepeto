@@ -19,11 +19,13 @@ class PuppetCommand
     facter_product  = puppet_module
     facter_environment = app_environment
 
+    tag = "#{puppet_module}_#{facter_role}"
+
     Dir.mktmpdir(nil, "#{gepeto_root}/var") do |root_dir|
       run_cmds [
         "mkdir -p '#{yum_cache_dir}'",
         "cp -f '#{dockerfile}' '#{buildfile}' '#{root_dir}'",
-        "cd '#{root_dir}' && docker build -f puppet.dockerfile -t #{puppet_module}.puppet .",
+        "cd '#{root_dir}' && docker build -f puppet.dockerfile -t #{tag}.puppet .",
         [
           "cd '#{root_dir}' && ",
           "docker run --rm=true -ti ",
@@ -35,7 +37,7 @@ class PuppetCommand
           "-v #{yum_cache_dir}:/var/cache/yum/",
           (rpm_path_after && "-v #{File.dirname(rpm_path_after)}:/rpm_after"),
           (rpm_path_after && "-e RPM_TO_INSTALL_AFTER='/rpm_after/#{File.basename(rpm_path_after)}'"),
-          "#{puppet_module}.puppet "
+          "#{tag}.puppet "
         ].compact.join(' ')
       ]
     end
