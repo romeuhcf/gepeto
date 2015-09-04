@@ -74,14 +74,10 @@ Geração e instalação do RPM apartir do repositorio indicado
 
 ## Para instalar um RPM local, modifique seu install.pp no puppet (NÃO COMITAR)
 Exemplo:
-exec { 
-  "/usr/bin/yum -y install /rpm_after/vejinhas-widgets-0.0.0.4-67.el6.x86_64.rpm":
-  before => Package['vejinhas-widgets'],
-}
 
-package { 'vejinhas-widgets':
-   provider => rpm,
-   # install_options => ['-ivh --prefix=/Users/jorgesilveira/Codes/abril-gepeto/var/vejinhas-widgets/'],
-   source => '/rpm_after/vejinhas-widgets-0.0.0.4-67.el6.x86_64.rpm',
-   ensure => installed,
-}
+```
+  exec { 
+    "/usr/bin/yum -y install $RPM_TO_INSTALL":
+    before => Package['vejinhas-widgets'],
+  }
+```
