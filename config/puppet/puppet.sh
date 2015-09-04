@@ -17,7 +17,7 @@ if [ "$FACTER_role" != 'web' ]; then
  echo "Facter role provided. Including class $INCLUDED_CLASS"
 fi
 
-if puppet apply -tvd --modulepath=$MODULES_PATH -e"include $INCLUDED_CLASS"; then
+if puppet apply -tvd --modulepath=$MODULES_PATH -e"include hardening,ntp,$INCLUDED_CLASS"; then
   echo "Sucesso aplicando puppet"
 else
   echo "Puppet saiu com status: $?"
@@ -25,10 +25,10 @@ fi
 
 echo
 echo "-----------------------------------------------------------------------------"
-echo "- instalando rpm $RPM_TO_INSTALL_AFTER"
+echo "- instalando rpm $RPM_TO_INSTALL"
 echo "-----------------------------------------------------------------------------"
-if [ -n "$RPM_TO_INSTALL_AFTER" ]; then
-  yum install -y "$RPM_TO_INSTALL_AFTER"  || true
+if [ -n "$RPM_TO_INSTALL" ]; then
+  yum install -y "$RPM_TO_INSTALL"  || true
 fi
 
 echo

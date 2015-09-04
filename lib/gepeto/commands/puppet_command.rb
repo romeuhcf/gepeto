@@ -36,7 +36,7 @@ class PuppetCommand
           "-v '#{puppet_root}:/etc/puppet'",
           "-v #{yum_cache_dir}:/var/cache/yum/",
           (rpm_path_after && "-v #{File.dirname(rpm_path_after)}:/rpm_after"),
-          (rpm_path_after && "-e RPM_TO_INSTALL_AFTER='/rpm_after/#{File.basename(rpm_path_after)}'"),
+          (rpm_path_after && "-e RPM_TO_INSTALL='/rpm_after/#{File.basename(rpm_path_after)}'"),
           "#{tag}.puppet "
         ].compact.join(' ')
       ]
