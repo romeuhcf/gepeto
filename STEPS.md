@@ -76,8 +76,10 @@ Geração e instalação do RPM apartir do repositorio indicado
 Exemplo:
 
 ```
-  exec { 
+  exec {
     "/usr/bin/yum -y install $RPM_TO_INSTALL":
-    before => Package['vejinhas-widgets'],
+    before  => Package['<PACKAGE_NAME>'],
+    path   => "/usr/bin:/usr/sbin:/bin",
+    unless => "rpm -qa | grep <PACKAGE_NAME>",
   }
 ```
