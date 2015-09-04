@@ -13,4 +13,5 @@ on(:repo_line) do |env, scope, file, line, lineno|
   if file =~ /\.spec\z/ and line =~ /%.*attr/ and line.include?('-')
     env.errors.add(:repo, file, line, lineno, "Não deveria usar '-' para definir permissoes. Sugestão, 0640 para arquivos e 0750 para dir")
   end
+  env.errors.add(scope, file, line, lineno, "Não deveria usar o oboe") if line.include?('liboboe')
 end

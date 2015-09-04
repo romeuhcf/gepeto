@@ -89,12 +89,19 @@ Dependências:
 
 Validação de estrutura / conteúdo de módulo puppet e projeto
 
-    ruby bin/cli.rb lint <PUPPET_MODULE_DIR> <REPOSITORY_DIR>
+    ruby bin/cli.rb lint -p <PUPPET_MODULE_DIR> -r <REPOSITORY_DIR>
 
 Onde:
 
 * PUPPET_MODULE_DIR: caminho do módulo do puppet a ser validado.
 * REPOSITORY_DIR: caminho do projeto onde está o arquivo .spec.
+
+Parâmetros:
+
+-p: puppet
+
+-r: repositório
+
 
 Exemplo:
 
