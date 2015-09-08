@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gepeto (0.0.1)
+    gepeto (0.0.2)
       colorize
       gli
 

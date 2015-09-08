@@ -77,9 +77,9 @@ Exemplo:
 
 ```
   exec {
-    "/usr/bin/yum -y install $RPM_TO_INSTALL":
+    '/usr/bin/yum -y install $RPM_TO_INSTALL':
     before  => Package['<PACKAGE_NAME>'],
     path   => "/usr/bin:/usr/sbin:/bin",
-    unless => "rpm -qa | grep <PACKAGE_NAME>",
+    unless => 'test -z "$RPM_TO_INSTALL" || rpm -qa | grep <PACKAGE_NAME>',
   }
 ```
