@@ -20,20 +20,25 @@ class RpmBuildCommand
 
     app_name       = repository.app_name
     bundler_cache_dir  = File.join(gepeto_cache_root, "var/cache/bundler", app_name)
+    maven_cache_dir  = File.join(gepeto_cache_root, "var/cache/maven")
     yum_cache_dir  = File.join(gepeto_cache_root, "var/cache/yum")
     dockerfile     = File.join(gepeto_root, "config/rpmbuild/Dockerfile")
     buildfile      = File.join(gepeto_root, "config/rpmbuild/build.sh")
     container_path = File.join(gepeto_cache_root, "var/#{app_name}")
     run_cmds [
       "mkdir -p '#{container_path}'",
+      "mkdir -p '#{maven_cache_dir}'",
       "mkdir -p '#{bundler_cache_dir}'",
       "mkdir -p '#{yum_cache_dir}'",
       "cp -f '#{dockerfile}' '#{buildfile}' '#{container_path}'",
+      # Would speed up requirements to build package on docker, but depends on custom repos ... How could we add custom repos via docker?
+      # "grep ^BuildRequires #{repo_root_path}/*.spec | sed 's/^BuildRequires:/RUN yum install -y /' >> #{container_path}/#{File.basename(dockerfile)}",
       "cd '#{container_path}' && docker build -t #{app_name}.rpmbuild .",
       [
-        "docker run --rm=true -t",
+        "docker run --rm=true -ti",
         "-v #{repo_root_path}:/code",
         "-v #{bundler_cache_dir}:/bundler_cache_dir",
+        "-v #{maven_cache_dir}:/root/.m2",
         "-v #{yum_cache_dir}:/var/cache/yum/",
         "-v #{container_path}:/container_path",
         "-e 'EXTRA_REPOS=#{repository.extra_repo(gepeto_root).join(' ')}'",
