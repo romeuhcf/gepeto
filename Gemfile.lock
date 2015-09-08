@@ -1,3 +1,10 @@
+PATH
+  remote: .
+  specs:
+    gepeto (0.0.1)
+      colorize
+      gli
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -8,5 +15,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  colorize
-  gli
+  gepeto!
+
+BUNDLED WITH
+   1.10.6

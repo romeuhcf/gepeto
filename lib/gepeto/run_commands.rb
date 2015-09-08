@@ -5,6 +5,10 @@ module RunCommands
     @_gepeto_root ||= File.expand_path(File.join( File.dirname(__FILE__), '../../'))
   end
 
+  def gepeto_cache_root
+    @_gepeto_cache_root ||= File.expand_path('~/Gepeto/')
+  end
+
   def run_cmds(cmds)
     cmds.each do |cmd|
       puts "\e[34m", "=" * 100, cmd , "=" * 100, "\e[0m"

@@ -33,7 +33,7 @@ $ git clone ssh://ec2-user@git.puppetmaster-desenv.abrilcloud.com.br:5022/opt/pu
 ### GEPETO: Rpm build
 Geração do RPM apartir do repositorio indicado
 
-    ruby bin/cli.rb rpmbuild <REPOSITORY_DIR>
+    gepeto rpmbuild <REPOSITORY_DIR>
 
 - O pacote é salvo na sua pasta var do projeto gepeto
 - Se algum pacote (BuildRequire) da sua .spec não for encontrado, editar o arquivo extra_repo.repo neste projeto e adicionar seu repo conforme exemplos.
@@ -44,7 +44,7 @@ Geração do RPM apartir do repositorio indicado
 ### GEPETO: Rpm install
 Geração e instalação do RPM apartir do repositorio indicado
 
-    ruby bin/cli.rb rpminstall <RPM_FILE> <REPOSITORY_DIR>
+    gepeto rpminstall <RPM_FILE> <REPOSITORY_DIR>
 
 - Neste ponto, se tudo correr bem, você acabará dentro da maquina virtual com o pacote instalado
 - Testar: rpm -qa | grep NOME DO PROJETO e verificar se foi instalado conforme gerado.
@@ -61,11 +61,11 @@ Geração e instalação do RPM apartir do repositorio indicado
 ### GEPETO: puppet lint
 
 ## Rodar o lint e arrumar os erros apresentados
-    ruby bin/cli.rb lint -p <MODULE_DIR> -r <REPOSITORY_DIR>
+    gepeto lint -p <MODULE_DIR> -r <REPOSITORY_DIR>
 
 ## rodar o puppet para instalar o ultimo package gerado e entrar na maquina
-    ruby bin/cli.rb puppet <PUPPET_DIR> <PUPPET_MODULE> -e [app_environment] -p [rpm a ser instalado no fim]
-    ruby bin/cli.rb puppet ~/puppet-manifests/ meuprojeto -e production -p ~/meuprojeto.rpm
+    gepeto puppet <PUPPET_DIR> <PUPPET_MODULE> -e [app_environment] -p [rpm a ser instalado no fim]
+    gepeto puppet ~/puppet-manifests/ meuprojeto -e production -p ~/meuprojeto.rpm
 
 
 

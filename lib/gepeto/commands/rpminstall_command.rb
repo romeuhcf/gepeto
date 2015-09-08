@@ -17,7 +17,7 @@ class RpmInstallCommand
     rpm_dir        = File.dirname(rpm_path)
     dockerfile     = File.join(gepeto_root, "config/rpminstall/Dockerfile")
     buildfile      = File.join(gepeto_root, "config/rpminstall/entrypoint.sh")
-    yum_cache_dir  = File.join(gepeto_root, "var/cache/yum")
+    yum_cache_dir  = File.join(gepeto_cache_root, "var/cache/yum")
     container_name = File.basename(rpm_path).gsub(/-\d.*/,'' ) + '.rpminstall'
 
     Dir.mktmpdir do |root_dir|

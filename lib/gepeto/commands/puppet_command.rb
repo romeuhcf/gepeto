@@ -13,7 +13,7 @@ class PuppetCommand
     puppet_root    = File.expand_path(puppet_root)
     dockerfile     = File.join(gepeto_root, "config/puppet/puppet.dockerfile")
     buildfile      = File.join(gepeto_root, "config/puppet/puppet.sh")
-    yum_cache_dir  = File.join(gepeto_root, "var/cache/yum")
+    yum_cache_dir  = File.join(gepeto_cache_root, "var/cache/yum")
     rpm_path_after = rpm_path_after && File.expand_path(rpm_path_after)
 
     facter_product  = puppet_module
@@ -21,7 +21,7 @@ class PuppetCommand
 
     tag = "#{puppet_module}_#{facter_role}"
 
-    Dir.mktmpdir(nil, "#{gepeto_root}/var") do |root_dir|
+    Dir.mktmpdir(nil, "#{gepeto_cache_root}/var") do |root_dir|
       run_cmds [
         "mkdir -p '#{yum_cache_dir}'",
         "cp -f '#{dockerfile}' '#{buildfile}' '#{root_dir}'",

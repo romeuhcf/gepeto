@@ -4,14 +4,14 @@ uma ferramenta de validação de regras de puppet para os projetos da Abril com 
 
 ## Como usar
 
-    ruby bin/cli.rb <comando> [parametros]
+    gepeto <comando> [parametros]
 
 ## Commandos Principais
 
 ### Rpm build
 Geração do RPM do repositório indicado
 
-    ruby bin/cli.rb rpmbuild <REPOSITORY_DIR>
+    gepeto rpmbuild <REPOSITORY_DIR>
 
 Onde:
 
@@ -19,7 +19,7 @@ Onde:
 
 Exemplo:
 
-    ruby  bin/cli.rb rpmbuild ~/meu-querido-projeto/
+    gepeto rpmbuild ~/meu-querido-projeto/
 
 Dependências:
 
@@ -29,7 +29,7 @@ Dependências:
 ### Rpm install
 Instalação do RPM
 
-    ruby bin/cli.rb rpminstall <RPM_PATH> -r <REPOSITORY_DIR>
+    gepeto rpminstall <RPM_PATH> -r <REPOSITORY_DIR>
 
 Onde:
 
@@ -49,7 +49,7 @@ com ruby 1.8, por exemplo, precisam desse arquivo com a linha `ruby18`.
 
 Exemplo:
 
-    ruby  bin/cli.rb rpminstall ./var/projeto/projeto-1.0.0.el6.rpm ~/projeto/
+    gepeto rpminstall ./var/projeto/projeto-1.0.0.el6.rpm ~/projeto/
 
 Dependências:
 
@@ -58,7 +58,7 @@ Dependências:
 
 ### Puppet
 Provisionamento de teste de puppet em docker
-    ruby bin/cli.rb puppet <PUPPET_DIR> <PUPPET_MODULE> [app_environment] [rpm a ser instalado no fim]
+    gepeto puppet <PUPPET_DIR> <PUPPET_MODULE> [app_environment] [rpm a ser instalado no fim]
 
 Onde:
 
@@ -79,7 +79,7 @@ Parâmetros:
 
 Exemplo:
 
-    ruby bin/cli.rb puppet ~/puppet-manifests/ meuprojeto -e production -r cron
+    gepeto puppet ~/puppet-manifests/ meuprojeto -e production -r cron
 
 Dependências:
 
@@ -89,7 +89,7 @@ Dependências:
 
 Validação de estrutura / conteúdo de módulo puppet e projeto
 
-    ruby bin/cli.rb lint -p <PUPPET_MODULE_DIR> -r <REPOSITORY_DIR>
+    gepeto lint -p <PUPPET_MODULE_DIR> -r <REPOSITORY_DIR>
 
 Onde:
 
@@ -105,7 +105,7 @@ Parâmetros:
 
 Exemplo:
 
-    ruby bin/cli.rb lint ~/projects/puppet/modules/cmsveja ~/projets/cmsveja
+    gepeto lint ~/projects/puppet/modules/cmsveja ~/projets/cmsveja
 
 
 #### Estrutura
