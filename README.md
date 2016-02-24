@@ -1,5 +1,5 @@
-# Abril Gepeto
-uma ferramenta de validação de regras de puppet para os projetos da Abril com o intuito de facilitar a padronização de regras e agilizar a busca e correção de erros.
+# Gepeto
+uma ferramenta de validação de regras de puppet para os projetos com o intuito de facilitar a padronização de regras e agilizar a busca e correção de erros.
 
 
 ## Como usar
@@ -75,7 +75,7 @@ Parâmetros:
 
 -p: rpm:
     Path do rpm gerado (ele é gerado, por padrão, dentro do projeto gepeto)
-    ex.: `-p ./var/meuprojeto/projeto1.0.0.0-1.el6.abril.x86_64.rpm`
+    ex.: `-p ./var/meuprojeto/projeto1.0.0.0-1.el6.x86_64.rpm`
 
 Exemplo:
 
@@ -127,7 +127,7 @@ Exemplo de regra:
 
 ```ruby
 on(:any_line) do |env, scope, file, line, lineno|
-  env.errors.add(scope, file, line, lineno, "Não deveria referenciar /var/abd - usar /opt/abril") if line.include?('/abd/')
+  env.errors.add(scope, file, line, lineno, "Não deveria referenciar /var/app - usar /opt/app") if line.include?('/app/')
 end
 
 on(:puppet_line) do |env, scope, file, line, lineno|
